@@ -1,0 +1,87 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id "com.google.protobuf" version "0.8.17"
+}
+
+android {
+    namespace 'com.me.protodatastore'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.me.protodatastore"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    android.buildFeatures.viewBinding = true
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:$supportLibVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+
+    // kotlin
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+
+    // architecture components
+    implementation "androidx.core:core-ktx:$coreVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+
+    // testing
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test:runner:$runnerVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+
+    implementation "com.squareup.moshi:moshi:1.13.0"
+    implementation "com.squareup.moshi:moshi-kotlin:1.13.0"
+    implementation "com.squareup.moshi:moshi-adapters:1.13.0"
+    implementation "com.squareup.moshi:moshi-kotlin-codegen:1.13.0"
+
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    implementation  "androidx.datastore:datastore:1.0.0"
+    implementation  "com.google.protobuf:protobuf-javalite:3.18.0"
+}
+
+protobuf {
+    protoc {
+        if (osdetector.os == "osx") {
+            artifact = 'com.google.protobuf:protoc:3.14.0:osx-x86_64'
+        } else {
+            artifact = 'com.google.protobuf:protoc:3.14.0'
+        }
+    }
+
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
+}

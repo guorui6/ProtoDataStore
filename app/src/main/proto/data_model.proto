@@ -1,0 +1,32 @@
+syntax = "proto3";
+option java_package = "com.me.models";
+option java_multiple_files = true;
+
+message DataModel {
+  repeated Person person = 1;
+}
+
+message Person {
+  string name = 1;
+  int32 age = 2;
+  Address address = 3;
+  int32 gender = 4;
+  string phone = 5;
+  string email = 6;
+  bool is_married = 7;
+  bool is_employed = 8;
+  int32 birthday = 9;
+  float height = 10;
+  float weight = 11;
+  int32 favorite_color = 12;
+  string hobby = 13;
+  string favorite_food = 14;
+  string occupation = 15;
+}
+
+message Address {
+  string street = 1;
+  string city = 2;
+  string state = 3;
+  int32 zip = 4;
+}

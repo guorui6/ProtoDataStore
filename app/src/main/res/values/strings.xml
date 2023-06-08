@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ProtoDataStore</string>
+    <string name="save">Init</string>
+    <string name="update">Update</string>
+    <string name="add">Add</string>
+    <string name="del">Del</string>
+</resources>
